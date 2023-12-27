@@ -1,0 +1,35 @@
+﻿<Window x:Class="WpfAppItProger.AuthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppItProger"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        ResizeMode="NoResize"
+        Icon="/images/app_icon.png"
+        Title="Pogoda App" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF230831" Offset="0"/>
+                <GradientStop Color="#FD6A248E" Offset="1"/>
+                <GradientStop Color="#FEB870DC" Offset="1"/>
+                <GradientStop Color="#FE180537" Offset="1"/>
+                <GradientStop Color="#FF5C1082" Offset="0.717"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+
+        <StackPanel>
+            <Label Margin="0,50,0,30" Content="Авторизация" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="White"/>
+            <TextBox x:Name="UserLogin" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="AliceBlue" materialDesign:HintAssist.Hint="Введите логин" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <PasswordBox Margin="0,20,0,0" x:Name="UserPass" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Foreground="AliceBlue" materialDesign:HintAssist.Hint="Введите пароль" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120"/>
+            <Button Margin="0,50,0,0" x:Name="UserAuth" Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Click="UserAuth_Click" />
+            <Button Margin="0,20,0,0" x:Name="LinkRegistr" Foreground="#FFB9B8B8" Style="{StaticResource MaterialDesignFlatButton}" Content="Зарегистрироваться" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Click="LinkRegistr_Click" />
+        </StackPanel>
+
+
+    </Grid>
+</Window>
+

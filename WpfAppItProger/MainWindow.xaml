@@ -1,0 +1,150 @@
+﻿<Window x:Class="WpfAppItProger.MainWindow"
+
+     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppItProger"
+        mc:Ignorable="d"
+        ResizeMode="NoResize"
+        Icon="/images/app_icon.png"
+        Title="Pogoda App" Height="450" Width="800">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF230831" Offset="0"/>
+                <GradientStop Color="#FD6A248E" Offset="1"/>
+                <GradientStop Color="#FEB870DC" Offset="1"/>
+                <GradientStop Color="#FE180537" Offset="1"/>
+                <GradientStop Color="#FF5C1082" Offset="0.717"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="581*" />
+            <ColumnDefinition Width="19*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1">
+            <RadioButton Style="{StaticResource MenuItem}" x:Name="MainScreen" Content="Главная" Checked="RadioButton_Checked"/>
+            <RadioButton Style="{StaticResource MenuItem}" x:Name="NotesScreen" Content="Заметки" Checked="RadioButton_Checked"/>
+            <RadioButton Style="{StaticResource MenuItem}" x:Name="CabinetScreen" Content="Личный кабинет" Checked="RadioButton_Checked" />
+            <RadioButton Style="{StaticResource MenuItem}" x:Name="AllUsers" Content="Список людей" Checked="RadioButton_Checked" />
+        </StackPanel>
+
+
+        <Label x:Name="LogoName" Content="UserName" FontWeight="Bold" Foreground="#fff" FontSize="18" Margin="40,10,10,10" />
+        <Button Style="{StaticResource MaterialDesignIconButton}" Grid.Column="1" Height="30" Width="30" Margin="530,10,0,10" Grid.ColumnSpan="2" Click="Button_Click_1" >
+            <Button.Background>
+                <ImageBrush ImageSource="/images/exit.png" Stretch="Uniform"/>
+            </Button.Background>
+        </Button>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="MainScreePanel" Grid.ColumnSpan="2">
+            <Image Source="/images/weather.png" Height="50" Width="50" Margin="0,20,0,0" />
+            <Label Margin="0,20,0,20" Content="Приложение погоды" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="White"/>
+            <TextBox x:Name="input1" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="AliceBlue" materialDesign:HintAssist.Hint="Введите город" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="button" Margin="0,30,0,0" Content="Показать температуру" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Click="button_Click"/>
+            <Label x:Name="wres" HorizontalAlignment="Center" Margin="0,20,0,0" Foreground="#fff" FontWeight="Bold" FontSize="18" VerticalAlignment="Top" IsEnabled="False"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="CabinetScreePanel" Grid.ColumnSpan="2" Visibility="Hidden">
+            <Label Margin="0,20,0,20" Content="Заметки" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Foreground="White"/>
+            <TextBox x:Name="UserLogin" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="AliceBlue" materialDesign:HintAssist.Hint="Введите логин" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="UserEmail" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="AliceBlue" materialDesign:HintAssist.Hint="Введите Емайл" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Button x:Name="ChangeUserBtn" Margin="0,30,0,0" Content="Изменить" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Click="ChangeUserBtn_Click" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="NotesScreePanel" Grid.ColumnSpan="2" Visibility="Hidden">
+
+            <Menu>
+                <MenuItem Header="Файл" Foreground="White" x:Name="MenuFile">
+                    <MenuItem Header="Новый файл" Click="MenuNewFile_Click" x:Name="MenuNewFile" Foreground="Black">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/new_file.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Открыть файл" Click="MenuOpenFile_Click" x:Name="MenuOpenFile" Foreground="Black">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/open_file.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Сохранить файл" Click="MenuSaveFile_Click" x:Name="MenuSaveFile" Foreground="Black">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/save_file.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="Редактировать" x:Name="MenuEdit" Foreground="White">
+                    <MenuItem Header="Шрифт" x:Name="MenuSetFont" Foreground="Black">
+                        <MenuItem Header="Times New Roman" Click="TimesNewRomanSetText_Click" x:Name="TimesNewRomanSetText" StaysOpenOnClick="True" IsCheckable="True" />
+                        <MenuItem Header="Verdana" Click="VerdanaSetText_Click" x:Name="VerdanaSetText" StaysOpenOnClick="True" IsCheckable="True" />
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Foreground="Black" x:Name="MenuCopyText" Header="Скопировать" Command="ApplicationCommands.Copy" InputGestureText="Cntrl+C" />
+                    <MenuItem Foreground="Black" x:Name="MenuCutText" Header="Вырезать" Command="ApplicationCommands.Cut" InputGestureText="Cntrl+X" />
+                    <MenuItem Foreground="Black" x:Name="MenuPasteText" Header="Вставить" Command="ApplicationCommands.Paste" InputGestureText="Cntrl+V" />
+                </MenuItem>
+            </Menu>
+
+            <ToolBarTray Background="Transparent">
+                <ToolBar Background="Transparent">
+                    <Button ToolTip="Сохранить файл" Style="{StaticResource MaterialDesignFlatAccentButton}" Click="MenuSaveFile_Click">
+                        <Image Source="/Images/save_file.png" Width="25" Height="25" />
+                    </Button>
+                    <Button ToolTip="Открыть файл" Style="{StaticResource MaterialDesignFlatAccentButton}" Click="MenuOpenFile_Click">
+                        <Image Source="/Images/open_file.png" Width="25" Height="25" />
+                    </Button>
+                    <Button ToolTip="Вырезать" Style="{StaticResource MaterialDesignFlatAccentButton}" Command="ApplicationCommands.Cut">
+                        <Image Source="/Images/cut_icon.png" Width="25" Height="25" />
+                    </Button>
+                    <Button ToolTip="Вставить" Style="{StaticResource MaterialDesignFlatAccentButton}" Command="ApplicationCommands.Paste">
+                        <Image Source="/Images/paste_icon.png" Width="25" Height="25" />
+                    </Button>
+                    <Label Content="Размер шрифта:" Foreground="White" VerticalAlignment="Center" Margin="10,0,0,0" />
+                    <ComboBox Foreground="White" x:Name="SelectFontSize" SelectionChanged="SelectFontSize_SelectionChanged">
+                        <ComboBoxItem Tag="10" Foreground="Black" Content="10px" />
+                        <ComboBoxItem Tag="12" Foreground="Black" x:Name="SetDefaultSize" Content="12px" />
+                        <ComboBoxItem Tag="14" Foreground="Black" Content="14px" />
+                        <ComboBoxItem Tag="16" Foreground="Black" Content="16px" />
+                        <ComboBoxItem Tag="20" Foreground="Black" Content="20px" />
+                    </ComboBox>
+                </ToolBar>
+            </ToolBarTray>
+
+
+            <TextBox x:Name="UserNotesTextBox" Margin="30,10,30,30" Style="{StaticResource MaterialDesignFilledTextBox}" materialDesign:HintAssist.Hint="Ваша заметка" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" MaxHeight="200" Foreground="White" />
+            
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" x:Name="AllUsersPanel" Margin="30,0,11,20" Visibility="Hidden">
+            <Label Margin="0,0,0,10" Content="Список пользователей" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" Foreground="White"/>
+            <TextBox x:Name="DeletedLogin" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="AliceBlue" materialDesign:HintAssist.Hint="Введите логин" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Button Margin="0,15,0,0" x:Name="BtnUserDeleted" Content="Удалить" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" Click="BtnUserDeleted_Click" />
+
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,10,0">
+                <ScrollViewer x:Name="productScrollViewer" VerticalScrollBarVisibility="Auto" Style="{StaticResource MaterialDesignScrollViewer}">
+                    <ListBox x:Name="userListView" Height="220">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Login}" FontWeight="Bold" Foreground="White" FontSize="16"/>
+                                        <TextBlock Text="{Binding Email}" Foreground="#e1dabc" FontSize="12"/>
+                                       </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
